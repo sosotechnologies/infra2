@@ -12,3 +12,5 @@ docker push 088789840359.dkr.ecr.us-east-1.amazonaws.com/nginx:1.19.8
 git add -A &&
 git commit -m "added kusto and source" &&
 git push 
+
+flux reconcile kustomization flux-system --with-source

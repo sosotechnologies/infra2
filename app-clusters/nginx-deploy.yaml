@@ -1,21 +1,20 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: realtimeapp-dev
-  namespace: flux-system
+  name: nginx
+  namespace: default
 spec:
-  healthChecks:
-  - kind: Deployment
-    name: realtime-dev
-    namespace: realtime-dev
-  - kind: Deployment
-    name: redis-dev
-    namespace: realtime-dev
-  interval: 1m0s
-  path: ./deploy/overlays/dev
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: realtimeapp-infra
-  timeout: 2m0s
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 088789840359.dkr.ecr.us-east-1.amazonaws.com/nginx:1.19.8
+        ports:
+        - containerPort: 80

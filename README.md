@@ -15,6 +15,9 @@ git push
 
 flux reconcile kustomization flux-system --with-source
 
+k create job --from=cronjob/ecr-credentials-sync -n flux-system ecr-credentials-sync-init
+
+
 ***This is my original Trust policy for IAM Role: hr-dev-irsa-iam-role***
 
 ```json

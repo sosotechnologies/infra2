@@ -68,7 +68,7 @@ spec:
             - -ce
             - aws ecr get-login-password --region ${REGION} > /token/ecr-token
           containers:
-          - image: bitnami/kubectl
+          - image: busybox:1.28
             name: create-secret
             imagePullPolicy: IfNotPresent
             env:

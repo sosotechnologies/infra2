@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: nginx
+  namespace: flux-system
+spec:
+  secretRef:
+    name: ecr-credentials
+  image:  088789840359.dkr.ecr.us-east-1.amazonaws.com/nginx
+  interval: 1m0s

@@ -14,3 +14,49 @@ git commit -m "added kusto and source" &&
 git push 
 
 flux reconcile kustomization flux-system --with-source
+
+***This is my original Trust policy for IAM Role: hr-dev-irsa-iam-role***
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::088789840359:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/43950C62DBA1803849E1E2F5F2923DEB"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.eks.us-east-1.amazonaws.com/id/43950C62DBA1803849E1E2F5F2923DEB:sub": "system:serviceaccount:default:irsa-demo-sa"
+                }
+            }
+        }
+    ]
+}
+```
+
+updated to
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "",
+			"Effect": "Allow",
+			"Principal": {
+				"Federated": "arn:aws:iam::088789840359:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/43950C62DBA1803849E1E2F5F2923DEB"
+			},
+			"Action": "sts:AssumeRoleWithWebIdentity",
+			"Condition": {
+				"StringEquals": {
+					"oidc.eks.us-east-1.amazonaws.com/id/43950C62DBA1803849E1E2F5F2923DEB:sub": "system:serviceaccount:flux-system:ecr-credentials-sync"
+				}
+			}
+		}
+	]
+}
+```

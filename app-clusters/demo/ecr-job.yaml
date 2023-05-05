@@ -66,7 +66,7 @@ spec:
             command:
             - /bin/sh
             - -ce
-            - aws ecr get-login-password --region ${REGION} > /token/ecr-token
+            - aws ecr get-login-password --region=us-east-1 > /token/ecr-token
           containers:
           - image: busybox:1.28
             name: create-secret
